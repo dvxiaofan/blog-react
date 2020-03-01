@@ -1,12 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { Row, Col} from 'antd';
 import Header from '../components/Header';
 
-const Home = () => (
+const List = () => (
 	<div className='container'>
 		<Head>
-			<title>首页</title> <link rel='icon' href='/public/favicon.ico' />
+			<title>列表</title> <link rel='icon' href='/public/favicon.ico' />
 		</Head>{' '}
 		<Header />
 
@@ -21,4 +22,4 @@ const Home = () => (
 	</div>
 );
 
-export default Home;
+export default List;

@@ -3,10 +3,10 @@ import Head from 'next/head';
 import { Row, Col} from 'antd';
 import Header from '../components/Header';
 
-const Home = () => (
+const Detail = () => (
 	<div className='container'>
 		<Head>
-			<title>首页</title> <link rel='icon' href='/public/favicon.ico' />
+			<title>详情</title> <link rel='icon' href='/public/favicon.ico' />
 		</Head>{' '}
 		<Header />
 
@@ -21,4 +21,4 @@ const Home = () => (
 	</div>
 );
 
-export default Home;
+export default Detail;
