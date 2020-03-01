@@ -7,7 +7,7 @@ const Author = () => {
 			<div>
 				<Avatar
 					size={100}
-					src='https://devzhang.oss-cn-beijing.aliyuncs.com/img/53d61c80b5a7c.jpg'
+					src='http://img.devzhangjs.com/img/2020-03-01-151248.png'
 				/>
 			</div>
 			<div className='author-des'>
