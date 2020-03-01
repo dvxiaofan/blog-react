@@ -7,7 +7,7 @@ import Header from '../components/Header';
 const Home = () => (
 	<div className='container'>
 		<Head>
-			<title> Home </title> <link rel='icon' href='/favicon.ico' />
+			<title>首页</title> <link rel='icon' href='/public/favicon.ico' />
 		</Head>{' '}
 		<Header />
 	</div>
