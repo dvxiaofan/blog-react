@@ -98,7 +98,7 @@ const Detail = () => {
 				<Col className='comm-right' xs={0} sm={0} md={7} lg={5} xl={4}>
 					<Author />
 					<Advert />
-					<Affix offset={5}>
+					<Affix offsetTop={5}>
 						<div className='detail-nav comm-box'>
 							<div className='nav-title'>文章目录</div>
 							<MarkNav
