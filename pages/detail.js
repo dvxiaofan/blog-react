@@ -1,15 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
-import { Row, Col, Icon, Breadcrumb } from 'antd';
+import { Row, Col, Icon, Breadcrumb, Affix } from 'antd';
 import Header from '../components/Header';
 import Author from '../components/Author';
 import Footer from '../components/Footer';
 import Advert from '../components/Advert';
 import ReactMarkdown from 'react-markdown';
+import MarkNav from 'markdown-navbar';
+import 'markdown-navbar/dist/navbar.css';
 import '../static/style/pages/detail.css';
 
 const Detail = () => {
-
 	let markdown =
 		'# P01:课程介绍和环境搭建\n' +
 		'[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
@@ -87,16 +88,27 @@ const Detail = () => {
 							</span>
 						</div>
 						<div className='detail-content'>
-                            <ReactMarkdown
-                                source={markdown}
-                                escapeHtml={false}
-                            />
-                        </div>
+							<ReactMarkdown
+								source={markdown}
+								escapeHtml={false}
+							/>
+						</div>
 					</div>
 				</Col>
 				<Col className='comm-right' xs={0} sm={0} md={7} lg={5} xl={4}>
 					<Author />
 					<Advert />
+					<Affix offset={5}>
+						<div className='detail-nav comm-box'>
+							<div className='nav-title'>文章目录</div>
+							<MarkNav
+								className='article-menu'
+								source={markdown}
+								// headingTopOffset={0}
+								ordered={true} // 是否有编号
+							/>
+						</div>
+					</Affix>
 				</Col>
 			</Row>
 			<Footer />
