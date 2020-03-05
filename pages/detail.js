@@ -6,47 +6,33 @@ import Author from '../components/Author';
 import Footer from '../components/Footer';
 import axios from 'axios';
 import Advert from '../components/Advert';
-import ReactMarkdown from 'react-markdown';
 import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
 import '../static/style/pages/detail.css';
 
-const Detail = (article) => {
-	let markdown =
-		'# P01:课程介绍和环境搭建\n' +
-		'[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
-		'> Mditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已... \n\n' +
-		'**这是加粗的文字**\n\n' +
-		'*这是倾斜的文字*`\n\n' +
-		'***这是斜体加粗的文字***\n\n' +
-		'~~这是加删除线的文字~~ \n\n' +
-		'`console.log(111)` \n\n' +
-		'# p02:来个Hello World 初始Vue3.0\n' +
-		'> aaaaaaaaa\n' +
-		'>> bbbbbbbbb\n' +
-		'>>> cccccccccc\n' +
-		'***\n\n\n' +
-		'# p03:Vue3.0基础知识讲解\n' +
-		'> aaaaaaaaa\n' +
-		'>> bbbbbbbbb\n' +
-		'>>> cccccccccc\n\n' +
-		'# p04:Vue3.0基础知识讲解\n' +
-		'> aaaaaaaaa\n' +
-		'>> bbbbbbbbb\n' +
-		'>>> cccccccccc\n\n' +
-		'#5 p05:Vue3.0基础知识讲解\n' +
-		'> aaaaaaaaa\n' +
-		'>> bbbbbbbbb\n' +
-		'>>> cccccccccc\n\n' +
-		'# p06:Vue3.0基础知识讲解\n' +
-		'> aaaaaaaaa\n' +
-		'>> bbbbbbbbb\n' +
-		'>>> cccccccccc\n\n' +
-		'# p07:Vue3.0基础知识讲解\n' +
-		'> aaaaaaaaa\n' +
-		'>> bbbbbbbbb\n' +
-		'>>> cccccccccc\n\n' +
-		'``` var a=11; ```';
+import marked from 'marked';
+import highlight from 'highlight.js';
+import 'highlight.js/styles/monokai-sublime.css';
+
+const Detail = (props) => {
+
+	const renderer = new marked.Renderer()
+
+	marked.setOptions({
+		renderer,
+		gfm: true,
+		pedantic: false,	// 容错
+		sanitize: false,	// 是否忽略html
+		tables: true,		// 表格	-- gfm 为 true 才有效
+		breaks: false,		// 换行符 -- gfm 为 true 才有效
+		smartLists: true,	// 自动渲染列表
+		highlight: function(code) {
+			// 根据传入代码检测显示方法
+			return highlight.highlightAuto(code)
+		}
+	})
+
+	let html = marked(props.articleContent)
 
 	return (
 		<div className='container'>
@@ -75,24 +61,23 @@ const Detail = (article) => {
 					</div>
 					<div>
 						<div className='detail-title'>
-							{article.title}
+							{props.title}
 						</div>
 						<div className='list-icon center'>
 							<span>
-								<Icon type='calendar' /> {article.addTime}
+								<Icon type='calendar' /> {props.addTime}
 							</span>
 							<span>
-								<Icon type='folder' /> {article.typeName}
+								<Icon type='folder' /> {props.typeName}
 							</span>
 							<span>
-								<Icon type='fire' /> {article.viewCount}
+								<Icon type='fire' /> {props.viewCount}
 							</span>
 						</div>
-						<div className='detail-content'>
-							<ReactMarkdown
-								source={markdown}
-								escapeHtml={false}
-							/>
+						<div className='detail-content'
+							dangerouslySetInnerHTML={{__html: html}}
+						>
+							
 						</div>
 					</div>
 				</Col>
@@ -104,7 +89,7 @@ const Detail = (article) => {
 							<div className='nav-title'>文章目录</div>
 							<MarkNav
 								className='article-menu'
-								source={markdown}
+								source={html}
 								// headingTopOffset={0}
 								ordered={true} // 是否有编号
 							/>
