@@ -5,9 +5,9 @@ import Header from '../components/Header';
 import Author from '../components/Author';
 import Footer from '../components/Footer';
 import axios from 'axios';
+import servicePath from '../config/apiUrl';
 // import Advert from '../components/Advert';
 import '../static/style/pages/detail.css';
-
 import marked from 'marked';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai-sublime.css';
@@ -106,7 +106,7 @@ Detail.getInitialProps = async context => {
 	let id = context.query.id;
 
 	const promise = new Promise(resolve => {
-		axios('http://127.0.0.1:7001/default/getArticleById/' + id).then(
+		axios(servicePath.getArticleById + id).then(
 			res => {
 				// console.log('res: ', res.data);
 				resolve(res.data.data[0]);
