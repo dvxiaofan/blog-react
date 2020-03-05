@@ -24,7 +24,7 @@ const Header = () => {
 	// 右上导航的点击事件
 	const handleClick = e => {
 		if (e.key == 0) {
-			Router.push('/index');
+			Router.push('/');
 		} else {
 			Router.push('/list?id=' + e.key);
 		}
@@ -34,7 +34,11 @@ const Header = () => {
 		<div className='header'>
 			<Row type='flex' justify='center'>
 				<Col xs={24} sm={24} md={10} lg={15} xl={12}>
-					<span className='header-logo'> DevZhang </span>
+					<Link href='/'>
+						<a>
+							<span className='header-logo'> DevZhang </span>
+						</a>
+					</Link>
 					<span className='header-txt'>
 						永远相信美好的事情即将发生
 					</span>
