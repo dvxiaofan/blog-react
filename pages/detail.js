@@ -4,13 +4,14 @@ import { Row, Col, Icon, Breadcrumb, Affix } from 'antd';
 import Header from '../components/Header';
 import Author from '../components/Author';
 import Footer from '../components/Footer';
+import axios from 'axios';
 import Advert from '../components/Advert';
 import ReactMarkdown from 'react-markdown';
 import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
 import '../static/style/pages/detail.css';
 
-const Detail = () => {
+const Detail = (article) => {
 	let markdown =
 		'# P01:课程介绍和环境搭建\n' +
 		'[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n' +
@@ -74,17 +75,17 @@ const Detail = () => {
 					</div>
 					<div>
 						<div className='detail-title'>
-							JS 基础知识点及常考面试题(一)
+							{article.title}
 						</div>
 						<div className='list-icon center'>
 							<span>
-								<Icon type='calendar' /> 2020-03-01
+								<Icon type='calendar' /> {article.addTime}
 							</span>
 							<span>
-								<Icon type='folder' /> JavaScript
+								<Icon type='folder' /> {article.typeName}
 							</span>
 							<span>
-								<Icon type='fire' /> 5565
+								<Icon type='fire' /> {article.viewCount}
 							</span>
 						</div>
 						<div className='detail-content'>
@@ -115,5 +116,20 @@ const Detail = () => {
 		</div>
 	);
 };
+
+Detail.getInitialProps = async(context) => {
+
+	let id = context.query.id
+
+	const promise = new Promise((resolve => {
+		axios('http://127.0.0.1:7001/default/getArticleById/' + id)
+		.then(res => {
+			// console.log('res: ', res.data);
+			resolve(res.data.data[0])
+		})
+	}))
+
+	return await promise
+}
 
 export default Detail;
