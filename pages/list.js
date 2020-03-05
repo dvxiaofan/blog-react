@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Row, Col, List, Icon, Breadcrumb } from 'antd';
 import Header from '../components/Header';
 import Author from '../components/Author';
-import Advert from '../components/Advert';
+// import Advert from '../components/Advert';
 import Footer from '../components/Footer';
 
 const BlogList = () => {
@@ -87,7 +87,7 @@ const BlogList = () => {
 				</Col>
 				<Col className='comm-right' xs={0} sm={0} md={7} lg={5} xl={4}>
 					<Author />
-					<Advert />
+					{/* <Advert /> */}
 				</Col>
 			</Row>
 			<Footer />

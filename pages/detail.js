@@ -5,9 +5,7 @@ import Header from '../components/Header';
 import Author from '../components/Author';
 import Footer from '../components/Footer';
 import axios from 'axios';
-import Advert from '../components/Advert';
-import MarkNav from 'markdown-navbar';
-import 'markdown-navbar/dist/navbar.css';
+// import Advert from '../components/Advert';
 import '../static/style/pages/detail.css';
 
 import marked from 'marked';
@@ -90,7 +88,7 @@ const Detail = props => {
 				</Col>
 				<Col className='comm-right' xs={0} sm={0} md={7} lg={5} xl={4}>
 					<Author />
-					<Advert />
+					{/* <Advert /> */}
 					<Affix offsetTop={5}>
 						<div className='detail-nav comm-box'>
 							<div className='nav-title'> 文章目录 </div>
