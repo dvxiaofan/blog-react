@@ -1,39 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Row, Col, List, Icon, Breadcrumb } from 'antd';
 import Header from '../components/Header';
 import Author from '../components/Author';
 // import Advert from '../components/Advert';
 import Footer from '../components/Footer';
+import axios from 'axios';
+import servicePath from '../config/apiUrl';
+import Link from 'next/link';
+import marked from 'marked';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/monokai-sublime.css';
 
-const BlogList = () => {
-	const [MyList, setMyList] = useState([
-		{
-			title: 'JS 基础知识点及常考面试题(一',
-			context:
-				'JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，'
-		},
-		{
-			title: 'JS 基础知识点及常考面试题(二',
-			context:
-				'JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，'
-		},
-		{
-			title: 'JS 基础知识点及常考面试题(三',
-			context:
-				'JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，'
-		},
-		{
-			title: 'JS 基础知识点及常考面试题(四',
-			context:
-				'JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，'
-		},
-		{
-			title: 'JS 基础知识点及常考面试题(五',
-			context:
-				'JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，JS 对于每位前端开发都是必备技能，在小册中我们也会有多个章节去讲述这部分的知识。首先我们先来熟悉下 JS 的一些常考和容易混乱的基础知识点原始（Primitive）类型涉及面试题：原始类型有哪几种？null 是对象嘛？在 JS 中，存在着 6 种原始值，分别是：首先原始类型存储的都是值，是没有函数可以调用的，比如 undefined.toString()此时你肯定会有疑问，这不对呀，'
+const BlogList = list => {
+	const [MyList, setMyList] = useState(list.data);
+
+	const renderer = new marked.Renderer();
+
+	marked.setOptions({
+		renderer: renderer,
+		gfm: true,
+		pedantic: false, // 容错
+		sanitize: false, // 是否忽略html
+		tables: true, // 表格	-- gfm 为 true 才有效
+		breaks: false, // 换行符 -- gfm 为 true 才有效
+		smartLists: true, // 自动渲染列表
+		highlight: function(code) {
+			// 根据传入代码检测显示方法
+			return hljs.highlightAuto(code).value;
 		}
-	]);
+	});
+
+	// 每次更新组件, 更新list 界面数据
+	useEffect(() => {
+		setMyList(list.data);
+	});
 
 	return (
 		<div className='container'>
@@ -51,7 +52,7 @@ const BlogList = () => {
 					lg={18}
 					xl={14}
 				>
-                    {/* // 面包屑导航 */}
+					{/* // 面包屑导航 */}
 					<div className='bread-div'>
 						<Breadcrumb>
 							<Breadcrumb.Item>
@@ -66,21 +67,33 @@ const BlogList = () => {
 						dataSource={MyList}
 						renderItem={item => (
 							<List.Item>
-								<div className='list-title'>{item.title}</div>
+								<div className='list-title'>
+									<Link
+										href={{
+											pathname: '/list',
+											query: { id: item.id }
+										}}
+									>
+										<a>{item.title}</a>
+									</Link>
+								</div>
 								<div className='list-icon'>
 									<span>
-										<Icon type='calendar' /> 2020-03-01
+										<Icon type='calendar' /> {item.addTime}
 									</span>
 									<span>
-										<Icon type='folder' /> JavaScript
+										<Icon type='folder' /> {item.typeName}
 									</span>
 									<span>
-										<Icon type='fire' /> 7676
+										<Icon type='fire' /> {item.viewCount}
 									</span>
 								</div>
-								<div className='list-context'>
-									{item.context}
-								</div>
+								<div
+									className='list-context'
+									dangerouslySetInnerHTML={{
+										__html: marked(item.introduce)
+									}}
+								></div>
 							</List.Item>
 						)}
 					/>
@@ -93,6 +106,16 @@ const BlogList = () => {
 			<Footer />
 		</div>
 	);
+};
+
+BlogList.getInitialProps = async context => {
+	let id = context.query.id;
+	const promise = new Promise(resolve => {
+		axios(servicePath.getListById + id).then(res => {
+			resolve(res.data);
+		});
+	});
+	return promise;
 };
 
 export default BlogList;
