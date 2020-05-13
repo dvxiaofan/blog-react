@@ -11,7 +11,7 @@ const Author = () => {
                 />
             </div>
             <div className="author-des">
-                一个行走在前端路上的信徒
+                砥砺前行
                 <Divider>社交账号</Divider>
                 <Avatar size={28} icon="github" className="account" />
                 <Avatar size={28} icon="qq" className="account" />
