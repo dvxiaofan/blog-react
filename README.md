@@ -1,6 +1,6 @@
 # Blog-React
 
-这是个通过React和Next.js结合构建的博客项目
+这是个通过React和Next.js结合构建的博客项目，目前仅在本地测试使用， 还未上线
 
 ## 运行项目
 
