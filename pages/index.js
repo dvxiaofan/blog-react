@@ -23,8 +23,8 @@ const Home = (list) => {
         gfm: true,
         pedantic: false, // 容错
         sanitize: false, // 是否忽略html
-        tables: true, // 表格	-- gfm 为 true 才有效
-        breaks: false, // 换行符 -- gfm 为 true 才有效
+        tables: true, // 表格-- gfm 为 true 才有效
+        breaks: false, // 换行符-- gfm 为 true 才有效
         smartLists: true, // 自动渲染列表
         highlight: function (code) {
             // 根据传入代码检测显示方法
